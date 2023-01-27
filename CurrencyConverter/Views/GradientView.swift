@@ -14,7 +14,7 @@ class GradientView: UIView {
         super.awakeFromNib()
         gradientLayer.frame = bounds
         gradientLayer.colors = [UIColor.systemBackground.cgColor, UIColor.magenta.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.75)
         gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
         layer.insertSublayer(gradientLayer, at: 0)
     }

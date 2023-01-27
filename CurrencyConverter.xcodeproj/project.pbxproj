@@ -33,6 +33,13 @@
 		9329AFDC2983D4E2004862D5 /* CurrencyRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9329AFDB2983D4E2004862D5 /* CurrencyRates.swift */; };
 		9329AFDE2983D521004862D5 /* CurrencySymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9329AFDD2983D521004862D5 /* CurrencySymbols.swift */; };
 		9329AFE02983D54E004862D5 /* CurrencyConverterApiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9329AFDF2983D54E004862D5 /* CurrencyConverterApiImpl.swift */; };
+		9329AFE729840AF9004862D5 /* CurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9329AFE529840AF9004862D5 /* CurrencyTableViewCell.swift */; };
+		9329AFE829840AF9004862D5 /* CurrencyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9329AFE629840AF9004862D5 /* CurrencyTableViewCell.xib */; };
+		9329AFEA29840D73004862D5 /* CurrencyCellViewParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9329AFE929840D73004862D5 /* CurrencyCellViewParam.swift */; };
+		9329AFED298416FB004862D5 /* CurrencySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9329AFEB298416FB004862D5 /* CurrencySelectionViewController.swift */; };
+		9329AFEE298416FB004862D5 /* CurrencySelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9329AFEC298416FB004862D5 /* CurrencySelectionViewController.xib */; };
+		9329AFF029841D07004862D5 /* CurrencySelectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9329AFEF29841D07004862D5 /* CurrencySelectionPresenter.swift */; };
+		9329AFF3298426A8004862D5 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9329AFF2298426A8004862D5 /* String+Extensions.swift */; };
 		DD5CE26FE3110DE30C93B547 /* Pods_CurrencyConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88D545FF32B93BEF78F3AF0 /* Pods_CurrencyConverter.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +94,13 @@
 		9329AFDB2983D4E2004862D5 /* CurrencyRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRates.swift; sourceTree = "<group>"; };
 		9329AFDD2983D521004862D5 /* CurrencySymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySymbols.swift; sourceTree = "<group>"; };
 		9329AFDF2983D54E004862D5 /* CurrencyConverterApiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterApiImpl.swift; sourceTree = "<group>"; };
+		9329AFE529840AF9004862D5 /* CurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewCell.swift; sourceTree = "<group>"; };
+		9329AFE629840AF9004862D5 /* CurrencyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyTableViewCell.xib; sourceTree = "<group>"; };
+		9329AFE929840D73004862D5 /* CurrencyCellViewParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCellViewParam.swift; sourceTree = "<group>"; };
+		9329AFEB298416FB004862D5 /* CurrencySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectionViewController.swift; sourceTree = "<group>"; };
+		9329AFEC298416FB004862D5 /* CurrencySelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencySelectionViewController.xib; sourceTree = "<group>"; };
+		9329AFEF29841D07004862D5 /* CurrencySelectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectionPresenter.swift; sourceTree = "<group>"; };
+		9329AFF2298426A8004862D5 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		A2AD3C4200417C7E6815A196 /* Pods-CurrencyConverter-CurrencyConverterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyConverter-CurrencyConverterUITests.release.xcconfig"; path = "Target Support Files/Pods-CurrencyConverter-CurrencyConverterUITests/Pods-CurrencyConverter-CurrencyConverterUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A88D545FF32B93BEF78F3AF0 /* Pods_CurrencyConverter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrencyConverter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9D25886AB6FDBB88D050994 /* Pods-CurrencyConverter-CurrencyConverterUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyConverter-CurrencyConverterUITests.debug.xcconfig"; path = "Target Support Files/Pods-CurrencyConverter-CurrencyConverterUITests/Pods-CurrencyConverter-CurrencyConverterUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -159,6 +173,7 @@
 		9329AF782982D73C004862D5 /* CurrencyConverter */ = {
 			isa = PBXGroup;
 			children = (
+				9329AFF129842699004862D5 /* Extensions */,
 				9329AFC82983C888004862D5 /* Repositories */,
 				9329AFC72983C881004862D5 /* Interactors */,
 				9329AFC52983C4B5004862D5 /* Entities */,
@@ -198,6 +213,8 @@
 			children = (
 				9329AFB22982E24F004862D5 /* CurrencyConverterViewController.swift */,
 				9329AFB32982E24F004862D5 /* CurrencyConverterViewController.xib */,
+				9329AFEB298416FB004862D5 /* CurrencySelectionViewController.swift */,
+				9329AFEC298416FB004862D5 /* CurrencySelectionViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -208,6 +225,8 @@
 				9329AFB72982E539004862D5 /* GradientView.swift */,
 				9329AFB92982E732004862D5 /* TextFieldView.swift */,
 				9329AFBB2982EB83004862D5 /* TextFieldView.xib */,
+				9329AFE529840AF9004862D5 /* CurrencyTableViewCell.swift */,
+				9329AFE629840AF9004862D5 /* CurrencyTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -224,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				9329AFC32983C439004862D5 /* CurrencyConverterPresenter.swift */,
+				9329AFEF29841D07004862D5 /* CurrencySelectionPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -269,6 +289,7 @@
 			children = (
 				9329AFD22983CF3A004862D5 /* CurrencyRatesViewParam.swift */,
 				9329AFD42983CFA3004862D5 /* CurrencySymbolsViewParam.swift */,
+				9329AFE929840D73004862D5 /* CurrencyCellViewParam.swift */,
 			);
 			path = ViewParams;
 			sourceTree = "<group>";
@@ -280,6 +301,14 @@
 				9329AFDD2983D521004862D5 /* CurrencySymbols.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		9329AFF129842699004862D5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9329AFF2298426A8004862D5 /* String+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A5E6669BD46E4249D265F21E /* Frameworks */ = {
@@ -403,8 +432,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9329AFB52982E24F004862D5 /* CurrencyConverterViewController.xib in Resources */,
+				9329AFE829840AF9004862D5 /* CurrencyTableViewCell.xib in Resources */,
 				9329AF892982D73D004862D5 /* LaunchScreen.storyboard in Resources */,
 				9329AFBC2982EB83004862D5 /* TextFieldView.xib in Resources */,
+				9329AFEE298416FB004862D5 /* CurrencySelectionViewController.xib in Resources */,
 				9329AF862982D73D004862D5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -562,10 +593,15 @@
 				9329AFC42983C439004862D5 /* CurrencyConverterPresenter.swift in Sources */,
 				9329AFD92983D150004862D5 /* CurrencyConverterApi.swift in Sources */,
 				9329AFE02983D54E004862D5 /* CurrencyConverterApiImpl.swift in Sources */,
+				9329AFF3298426A8004862D5 /* String+Extensions.swift in Sources */,
 				9329AFD02983CEBB004862D5 /* CurrencyConverterInteractor.swift in Sources */,
 				9329AFB82982E539004862D5 /* GradientView.swift in Sources */,
+				9329AFEA29840D73004862D5 /* CurrencyCellViewParam.swift in Sources */,
 				9329AFD52983CFA3004862D5 /* CurrencySymbolsViewParam.swift in Sources */,
+				9329AFED298416FB004862D5 /* CurrencySelectionViewController.swift in Sources */,
+				9329AFF029841D07004862D5 /* CurrencySelectionPresenter.swift in Sources */,
 				9329AFB42982E24F004862D5 /* CurrencyConverterViewController.swift in Sources */,
+				9329AFE729840AF9004862D5 /* CurrencyTableViewCell.swift in Sources */,
 				9329AF7C2982D73C004862D5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

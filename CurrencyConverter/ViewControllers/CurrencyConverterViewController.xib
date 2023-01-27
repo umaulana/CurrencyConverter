@@ -32,17 +32,21 @@
                         <constraint firstAttribute="height" constant="48" id="ug1-KI-37y"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbe-Cb-Pan">
-                    <rect key="frame" x="203" y="147" width="170" height="34.333333333333343"/>
-                    <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <buttonConfiguration key="configuration" style="filled" image="chevron.down" catalog="system" title="Select Currency">
-                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="baseBackgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </buttonConfiguration>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbe-Cb-Pan">
+                    <rect key="frame" x="215.33333333333337" y="147" width="157.66666666666663" height="36"/>
+                    <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="XLn-ic-DjK"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="8" maxX="16" maxY="8"/>
+                    <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="-8" maxY="0.0"/>
+                    <state key="normal" title="Select Currency" image="chevron.down" catalog="system">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
                 </button>
-                <tableView clipsSubviews="YES" alpha="0.69999999999999996" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bEs-8v-8OM">
-                    <rect key="frame" x="0.0" y="193.33333333333331" width="393" height="658.66666666666674"/>
+                <tableView clipsSubviews="YES" alpha="0.69999999999999996" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bEs-8v-8OM">
+                    <rect key="frame" x="0.0" y="183" width="393" height="669"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>
@@ -50,6 +54,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="pbe-Cb-Pan" firstAttribute="top" secondItem="oF4-qD-ksZ" secondAttribute="bottom" constant="20" id="9fd-Yp-DMS"/>
+                <constraint firstItem="pbe-Cb-Pan" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="BX6-VN-Qcy"/>
                 <constraint firstItem="gsy-98-d0X" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FYY-Cw-sfy"/>
                 <constraint firstItem="gsy-98-d0X" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="GVT-CA-k5V"/>
                 <constraint firstItem="bEs-8v-8OM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="HKk-zd-qhS"/>
@@ -58,7 +63,7 @@
                 <constraint firstAttribute="trailing" secondItem="gsy-98-d0X" secondAttribute="trailing" id="TXg-rt-Kol"/>
                 <constraint firstItem="oF4-qD-ksZ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="XjG-Ch-nrp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pbe-Cb-Pan" secondAttribute="trailing" constant="20" id="gkX-Ju-Llv"/>
-                <constraint firstItem="bEs-8v-8OM" firstAttribute="top" secondItem="pbe-Cb-Pan" secondAttribute="bottom" constant="12" id="mGp-36-fWy"/>
+                <constraint firstItem="bEs-8v-8OM" firstAttribute="top" secondItem="pbe-Cb-Pan" secondAttribute="bottom" id="mGp-36-fWy"/>
                 <constraint firstAttribute="bottom" secondItem="bEs-8v-8OM" secondAttribute="bottom" id="s0o-je-Apk"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bEs-8v-8OM" secondAttribute="trailing" id="vFe-ih-vBY"/>
                 <constraint firstItem="oF4-qD-ksZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="voz-dh-wms"/>

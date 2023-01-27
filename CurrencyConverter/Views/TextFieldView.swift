@@ -82,6 +82,10 @@ class TextFieldView: UIView {
         }
     }
     
+    func reset() {
+        textField.text = ""
+    }
+    
     private func configureSearchTextField() {
         textField.placeholder = "Search"
         leftImageView.image = UIImage(systemName: "magnifyingglass")
@@ -113,17 +117,8 @@ class TextFieldView: UIView {
     
     private func addZeroIfNecessary() {
         guard let text = textField.text else { return }
-        var newText = text
         
-        if let firstCharacter = text.first, firstCharacter == "." {
-            newText = "0" + newText
-        }
-        
-        if let lastCharacter = text.last, lastCharacter == "." {
-            newText = newText + "0"
-        }
-        
-        textField.text = newText
+        textField.text = text.addZeroIfNecessary
     }
 }
 
