@@ -13,7 +13,17 @@ class CurrencyConverterViewController: UIViewController {
     @IBOutlet private weak var selectCurrencyButton: UIButton!
     @IBOutlet private weak var tableView: UITableView!
     
+    private let presenter: CurrencyConverterPresenter
     private let disposeBag = DisposeBag()
+    
+    init(currencyConverterInteractor: CurrencyConverterInteractor) {
+        self.presenter = CurrencyConverterPresenter(currencyConverterInteractor: currencyConverterInteractor)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +54,8 @@ class CurrencyConverterViewController: UIViewController {
             .subscribe(onNext: { [weak self] _ in
                 self?.dissmissKeyboard()
             }).disposed(by: disposeBag)
+        
+        presenter.loadRates()
     }
     
     private func dissmissKeyboardAfterTap() {
