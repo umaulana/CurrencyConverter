@@ -56,6 +56,11 @@ class CurrencySelectionViewController: UIViewController {
                 guard let cell = cell as? CurrencyTableViewCell else { return }
                 cell.configure(viewParam: viewParam)
             }.disposed(by: disposeBag)
+        
+        tableView.rx.modelSelected(CurrencyCellViewParam.self)
+            .subscribe(onNext: { [weak self] viewParam in
+                self?.presenter.didSelectRow(viewParam: viewParam)
+            }).disposed(by: disposeBag)
     }
     
     private func bindEvents() {
@@ -64,16 +69,15 @@ class CurrencySelectionViewController: UIViewController {
                 self?.presenter.filterSymbols(with: text)
             }).disposed(by: disposeBag)
         
-        tableView.rx.modelSelected(CurrencyCellViewParam.self)
-            .subscribe(onNext: { [weak self] viewParam in
-                self?.presenter.didSelectRow(viewParam: viewParam)
-            }).disposed(by: disposeBag)
-        
         presenter.rxEventDidSelectRow
             .subscribe(onNext: { [weak self] viewParam in
                 self?.eventCurrencyChanged.onNext(viewParam)
                 self?.dismiss(animated: true)
             }).disposed(by: disposeBag)
+        
+        presenter.rxEventToggleTextFieldInteraction
+            .bind(to: textFieldView.rx.isUserInteractionEnabled)
+            .disposed(by: disposeBag)
         
         presenter.loadSymbols()
     }

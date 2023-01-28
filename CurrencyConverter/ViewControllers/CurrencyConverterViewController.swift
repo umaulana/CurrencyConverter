@@ -44,6 +44,8 @@ class CurrencyConverterViewController: UIViewController {
     }
     
     private func setupViews() {
+        toggleSelectCurrencyButton(isActive: false)
+        
         selectCurrencyButton.layer.cornerRadius = 4
         textFieldView.configure(type: .number)
         dissmissKeyboardAfterTap()
@@ -61,6 +63,12 @@ class CurrencyConverterViewController: UIViewController {
                 guard let cell = cell as? CurrencyTableViewCell else { return }
                 cell.configure(viewParam: viewParam)
             }.disposed(by: disposeBag)
+        
+        tableView.rx.modelSelected(CurrencyCellViewParam.self)
+            .filter { $0.symbol == "ERR" }
+            .subscribe(onNext: { [weak self] viewParam in
+                self?.presenter.retryRequest()
+            }).disposed(by: disposeBag)
     }
     
     private func bindEvents() {
@@ -85,7 +93,17 @@ class CurrencyConverterViewController: UIViewController {
                 self?.textFieldView.reset()
             }).disposed(by: disposeBag)
         
+        presenter.rxEventToggleselectCurrencyButton
+            .subscribe(onNext: { [weak self] isActive in
+                self?.toggleSelectCurrencyButton(isActive: isActive)
+            }).disposed(by: disposeBag)
+        
         presenter.loadRates()
+    }
+    
+    private func toggleSelectCurrencyButton(isActive: Bool) {
+        selectCurrencyButton.backgroundColor = isActive ? .magenta : .lightGray
+        selectCurrencyButton.isUserInteractionEnabled = isActive
     }
     
     private func dissmissKeyboardAfterTap() {

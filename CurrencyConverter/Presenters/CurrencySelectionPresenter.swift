@@ -23,6 +23,11 @@ class CurrencySelectionPresenter {
     var rxEventDidSelectRow: Observable<CurrencyCellViewParam> {
         return eventDidSelectRow
     }
+    private let eventToggleTextFieldInteraction = PublishSubject<Bool>()
+    var rxEventToggleTextFieldInteraction: Observable<Bool> {
+        return eventToggleTextFieldInteraction
+    }
+    
     private let disposeBag = DisposeBag()
     
     private(set) var cellViewParams = BehaviorRelay<[CurrencyCellViewParam]>(value: [])
@@ -62,11 +67,26 @@ class CurrencySelectionPresenter {
                 
                 self?.cellViewParams.accept(viewParam.symbols.map { CurrencyCellViewParam(symbol: $0.symbol,
                                                                                           value: $0.name)})
+                self?.eventToggleTextFieldInteraction.onNext(true)
+                
                 self?.currencyConverterCoreDataInteractor.saveSymbols(viewParam: viewParam)
                 self?.currencyConverterCoreDataInteractor.saveLastSymbolsRequest(date: Date())
-            }, onError: { error in
-                print(error)
+            }, onError: { [weak self] error in
+                self?.showRequestError()
             }).disposed(by: disposeBag)
+    }
+    
+    private func showRequestError() {
+        let errorParam = CurrencyCellViewParam(symbol: "ERR", value: "An error has occured (Tap here to retry)")
+        cellViewParams.accept([errorParam])
+        
+        eventToggleTextFieldInteraction.onNext(false)
+    }
+    
+    private func retryRequest() {
+        cellViewParams.accept([])
+        
+        requestNewSymbols()
     }
     
     func filterSymbols(with text: String) {
@@ -79,8 +99,11 @@ class CurrencySelectionPresenter {
     }
     
     func didSelectRow(viewParam: CurrencyCellViewParam) {
+        guard viewParam.symbol != "ERR" else {
+            retryRequest()
+            return
+        }
+        
         eventDidSelectRow.onNext(viewParam)
     }
 }
-
-

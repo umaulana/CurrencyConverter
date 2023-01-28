@@ -23,10 +23,17 @@ class CurrencyConverterPresenter {
     var rxEventUpdateButtonText: Observable<String> {
         return eventUpdateButtonText
     }
+    
     private let eventResetTextField = PublishSubject<Void>()
     var rxEventResetTextField: Observable<Void> {
         return eventResetTextField
     }
+    
+    private let eventToggleselectCurrencyButton = PublishSubject<Bool>()
+    var rxEventToggleselectCurrencyButton: Observable<Bool> {
+        return eventToggleselectCurrencyButton
+    }
+    
     private let disposeBag = DisposeBag()
     
     private(set) var cellViewParams = BehaviorRelay<[CurrencyCellViewParam]>(value: [])
@@ -55,6 +62,7 @@ class CurrencyConverterPresenter {
                 }
                 
                 self?.rates = viewParam.rates
+                self?.eventToggleselectCurrencyButton.onNext(true)
             }).disposed(by: disposeBag)
     }
     
@@ -62,11 +70,26 @@ class CurrencyConverterPresenter {
         self.currencyConverterInteractor.loadRates()
             .subscribe(onNext: { [weak self] viewParam in
                 self?.rates = viewParam.rates
+                
+                self?.eventToggleselectCurrencyButton.onNext(true)
                 self?.currencyConverterCoreDataInteractor.saveRates(viewParam: viewParam)
                 self?.currencyConverterCoreDataInteractor.saveLastRatesRequest(date: Date())
-            }, onError: { error in
-                print(error)
+            }, onError: { [weak self] _ in
+                self?.showRequestError()
             }).disposed(by: disposeBag)
+    }
+    
+    private func showRequestError() {
+        let errorParam = CurrencyCellViewParam(symbol: "ERR", value: "An error has occured (Tap here to retry)")
+        cellViewParams.accept([errorParam])
+        
+        eventToggleselectCurrencyButton.onNext(false)
+    }
+    
+    func retryRequest() {
+        cellViewParams.accept([])
+        
+        requestNewRates()
     }
     
     func currencyDidChanged(with viewParam: CurrencyCellViewParam) {
