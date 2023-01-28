@@ -21,8 +21,10 @@ class CurrencySelectionViewController: UIViewController {
     }
     private let disposeBag = DisposeBag()
     
-    init(currencyConverterInteractor: CurrencyConverterInteractor) {
-        self.presenter = CurrencySelectionPresenter(currencyConverterInteractor: currencyConverterInteractor)
+    init(currencyConverterInteractor: CurrencyConverterInteractor,
+         currencyConverterCoreDataInteractor: CurrencyConverterCoreDataInteractor) {
+        self.presenter = CurrencySelectionPresenter(currencyConverterInteractor: currencyConverterInteractor,
+                                                    currencyConverterCoreDataInteractor: currencyConverterCoreDataInteractor)
         super.init(nibName: nil, bundle: nil)
     }
     

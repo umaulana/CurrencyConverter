@@ -11,9 +11,12 @@ import RxRelay
 
 class CurrencyConverterPresenter {
     private let currencyConverterInteractor:  CurrencyConverterInteractor
+    private let currencyConverterCoreDataInteractor:  CurrencyConverterCoreDataInteractor
     
-    init(currencyConverterInteractor:  CurrencyConverterInteractor) {
+    init(currencyConverterInteractor:  CurrencyConverterInteractor,
+         currencyConverterCoreDataInteractor:  CurrencyConverterCoreDataInteractor) {
         self.currencyConverterInteractor = currencyConverterInteractor
+        self.currencyConverterCoreDataInteractor = currencyConverterCoreDataInteractor
     }
     
     private let eventUpdateButtonText = PublishSubject<String>()
@@ -31,9 +34,36 @@ class CurrencyConverterPresenter {
     private var selectedCurrency: CurrencyCellViewParam?
     
     func loadRates() {
+        self.currencyConverterCoreDataInteractor.loadLastRatesRequest()
+            .subscribe(onNext: { [weak self] date in
+                if date.is30MinutesDifferent(from: Date()) {
+                    self?.requestNewRates()
+                } else {
+                    self?.getRatesFromStorage()
+                }
+            }, onError: { [weak self] error in
+                self?.requestNewRates()
+            }).disposed(by: disposeBag)
+    }
+    
+    private func getRatesFromStorage() {
+        self.currencyConverterCoreDataInteractor.loadRates()
+            .subscribe(onNext: { [weak self] viewParam in
+                guard !viewParam.rates.isEmpty else {
+                    self?.requestNewRates()
+                    return
+                }
+                
+                self?.rates = viewParam.rates
+            }).disposed(by: disposeBag)
+    }
+    
+    private func requestNewRates() {
         self.currencyConverterInteractor.loadRates()
             .subscribe(onNext: { [weak self] viewParam in
                 self?.rates = viewParam.rates
+                self?.currencyConverterCoreDataInteractor.saveRates(viewParam: viewParam)
+                self?.currencyConverterCoreDataInteractor.saveLastRatesRequest(date: Date())
             }, onError: { error in
                 print(error)
             }).disposed(by: disposeBag)

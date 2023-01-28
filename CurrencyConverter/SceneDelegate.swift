@@ -20,8 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         let currencyConverterApi = CurrencyConverterApiImpl()
+        let currencyConverterCoreData = CurrencyConverterCoreDataImpl()
+        
+        let currencyConverterCoreDataInteractor = CurrencyConverterCoreDataInteractorImpl(currencyConverterCoreData: currencyConverterCoreData)
         let currencyConverterInteractor = CurrencyConverterInteractorImpl(currencyConverterApi: currencyConverterApi)
-        let rootViewController = CurrencyConverterViewController(currencyConverterInteractor: currencyConverterInteractor)
+        
+        let rootViewController = CurrencyConverterViewController(currencyConverterInteractor: currencyConverterInteractor,
+                                                                 currencyConverterCoreDataInteractor: currencyConverterCoreDataInteractor)
         window.rootViewController = UINavigationController(rootViewController: rootViewController)
         
         self.window = window

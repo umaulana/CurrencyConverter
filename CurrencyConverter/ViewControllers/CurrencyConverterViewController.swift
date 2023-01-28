@@ -17,8 +17,10 @@ class CurrencyConverterViewController: UIViewController {
     private let presenter: CurrencyConverterPresenter
     private let disposeBag = DisposeBag()
     
-    init(currencyConverterInteractor: CurrencyConverterInteractor) {
-        self.presenter = CurrencyConverterPresenter(currencyConverterInteractor: currencyConverterInteractor)
+    init(currencyConverterInteractor: CurrencyConverterInteractor,
+         currencyConverterCoreDataInteractor: CurrencyConverterCoreDataInteractor) {
+        self.presenter = CurrencyConverterPresenter(currencyConverterInteractor: currencyConverterInteractor,
+                                                    currencyConverterCoreDataInteractor: currencyConverterCoreDataInteractor)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -98,8 +100,13 @@ class CurrencyConverterViewController: UIViewController {
     
     private func showCurrencySelection() {
         let currencyConverterApi = CurrencyConverterApiImpl()
+        let currencyConverterCoreData = CurrencyConverterCoreDataImpl()
+        
+        let currencyConverterCoreDataInteractor = CurrencyConverterCoreDataInteractorImpl(currencyConverterCoreData: currencyConverterCoreData)
         let currencyConverterInteractor = CurrencyConverterInteractorImpl(currencyConverterApi: currencyConverterApi)
-        let currencySelection = CurrencySelectionViewController(currencyConverterInteractor: currencyConverterInteractor)
+        
+        let currencySelection = CurrencySelectionViewController(currencyConverterInteractor: currencyConverterInteractor,
+                                                                currencyConverterCoreDataInteractor: currencyConverterCoreDataInteractor)
         currencySelection.rxEventCurrencyChanged
             .subscribe(onNext: { [weak self] viewParam in
                 self?.presenter.currencyDidChanged(with: viewParam)
