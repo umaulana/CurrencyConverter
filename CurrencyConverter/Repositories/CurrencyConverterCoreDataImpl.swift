@@ -9,15 +9,54 @@ import CoreData
 import Foundation
 import RxSwift
 
-class CurrencyConverterCoreDataImpl: CurrencyConverterCoreData {
-    private let appDelegate: AppDelegate
-    private let context: NSManagedObjectContext
+class CurrencyConverterCoreDataImpl {
     
-    init() {
-        appDelegate = UIApplication.shared.delegate as! AppDelegate
-        context = appDelegate.persistentContainer.viewContext
+    // MARK: - Core Data stack
+
+    lazy var context: NSManagedObjectContext = {
+        /*
+         The persistent container for the application. This implementation
+         creates and returns a container, having loaded the store for the
+         application to it. This property is optional since there are legitimate
+         error conditions that could cause the creation of the store to fail.
+        */
+        let container = NSPersistentContainer(name: "CurrencyConverter")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                 
+                /*
+                 Typical reasons for an error here include:
+                 * The parent directory does not exist, cannot be created, or disallows writing.
+                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                 * The device is out of space.
+                 * The store could not be migrated to the current model version.
+                 Check the error message to determine what the actual problem was.
+                 */
+                print("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container.viewContext
+    }()
+
+    // MARK: - Core Data Saving support
+
+    func saveContext () {
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
     }
-    
+}
+
+extension CurrencyConverterCoreDataImpl: CurrencyConverterCoreData {
     func loadRates() -> Observable<CurrencyRates> {
         return Observable.create { observer in
             let fetchRequest: NSFetchRequest<CurrencyRatesEntity> = CurrencyRatesEntity.fetchRequest()
@@ -83,7 +122,7 @@ class CurrencyConverterCoreDataImpl: CurrencyConverterCoreData {
             rateContext.value = rate.value
         }
         
-        appDelegate.saveContext()
+        saveContext()
     }
     
     func saveSymbols(viewParam: CurrencySymbolsViewParam) {
@@ -103,7 +142,7 @@ class CurrencyConverterCoreDataImpl: CurrencyConverterCoreData {
             symbolContext.name = symbol.name
         }
         
-        appDelegate.saveContext()
+        saveContext()
     }
     
     func loadLastRatesRequest() -> Observable<Date> {
@@ -164,8 +203,7 @@ class CurrencyConverterCoreDataImpl: CurrencyConverterCoreData {
         let context = LastRatesRequestEntity(context: context)
         context.value = date
         
-        
-        appDelegate.saveContext()
+        saveContext()
     }
     
     func saveLastSymbolsRequest(date: Date) {
@@ -182,7 +220,6 @@ class CurrencyConverterCoreDataImpl: CurrencyConverterCoreData {
         let context = LastSymbolsRequestEntity(context: context)
         context.value = date
         
-        
-        appDelegate.saveContext()
+        saveContext()
     }
 }
