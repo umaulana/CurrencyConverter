@@ -55,8 +55,7 @@ class CurrencySelectionPresenter {
                 }
                 
                 self?.symbols = viewParam.symbols
-                self?.cellViewParams.accept(viewParam.symbols.map { CurrencyCellViewParam(symbol: $0.symbol,
-                                                                                          value: $0.name)})
+                self?.cellViewParams.accept(viewParam.toCurrencyCellViewParam())
             }).disposed(by: disposeBag)
     }
     
@@ -65,8 +64,7 @@ class CurrencySelectionPresenter {
             .subscribe(onNext: { [weak self] viewParam in
                 self?.symbols = viewParam.symbols
                 
-                self?.cellViewParams.accept(viewParam.symbols.map { CurrencyCellViewParam(symbol: $0.symbol,
-                                                                                          value: $0.name)})
+                self?.cellViewParams.accept(viewParam.toCurrencyCellViewParam())
                 self?.eventToggleTextFieldInteraction.onNext(true)
                 
                 self?.currencyConverterCoreDataInteractor.saveSymbols(viewParam: viewParam)

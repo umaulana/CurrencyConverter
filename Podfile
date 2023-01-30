@@ -22,6 +22,9 @@ target 'CurrencyConverter' do
     # Pods for testing
     pod 'RxBlocking', '6.5.0'
     pod 'RxTest', '6.5.0'
+    pod 'Cuckoo'
+    pod 'Quick'
+    pod 'Nimble'
   end
 
   target 'CurrencyConverterUITests' do

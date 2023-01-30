@@ -95,7 +95,7 @@ class CurrencyConverterPresenter {
     func currencyDidChanged(with viewParam: CurrencyCellViewParam) {
         selectedCurrency = viewParam
         
-        let buttonText = "(\(viewParam.symbol)) - \(viewParam.value)"
+        let buttonText = viewParam.toCurrencyButtonText()
         eventUpdateButtonText.onNext(buttonText)
         eventResetTextField.onNext(())
         cellViewParams.accept([])

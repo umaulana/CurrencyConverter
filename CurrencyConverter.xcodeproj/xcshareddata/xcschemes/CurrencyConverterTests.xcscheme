@@ -13,13 +13,22 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9329AF8E2982D73D004862D5"
                BuildableName = "CurrencyConverterTests.xctest"
                BlueprintName = "CurrencyConverterTests"
+               ReferencedContainer = "container:CurrencyConverter.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9329AF982982D73D004862D5"
+               BuildableName = "CurrencyConverterUITests.xctest"
+               BlueprintName = "CurrencyConverterUITests"
                ReferencedContainer = "container:CurrencyConverter.xcodeproj">
             </BuildableReference>
          </TestableReference>
