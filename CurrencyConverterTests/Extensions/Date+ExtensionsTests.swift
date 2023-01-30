@@ -5,31 +5,44 @@
 //  Created by umam on 28/01/23.
 //
 
+import Nimble
+import Quick
 import XCTest
 
-final class Date_ExtensionsTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+final class Date_ExtensionsTests: QuickSpec {
+    override func spec() {
+        describe("date is different by exactly 30 minutes to other date") {
+            
+            context("dates are different by 30 minutes") {
+                it("should return true") {
+                    let thirtyMinutes: Double = 30 * 60
+                    let firstDate = Date(timeIntervalSince1970: 0)
+                    let secondDate = Date(timeIntervalSince1970: 0).addingTimeInterval(thirtyMinutes)
+                    
+                    expect(firstDate.is30MinutesDifferent(from: secondDate)).to(beTrue())
+                }
+            }
+            
+            context("dates are different by less than 30 minutes") {
+                it("should return false") {
+                    let twentyMinutes: Double = 20 * 60
+                    let firstDate = Date(timeIntervalSince1970: 0)
+                    let secondDate = Date(timeIntervalSince1970: 0).addingTimeInterval(twentyMinutes)
+                    
+                    expect(firstDate.is30MinutesDifferent(from: secondDate)).to(beFalse())
+                }
+            }
+            
+            context("dates are different by more than 30 minutes") {
+                it("should return true") {
+                    let fourtyMinutes: Double = 40 * 60
+                    let firstDate = Date(timeIntervalSince1970: 0)
+                    let secondDate = Date(timeIntervalSince1970: 0).addingTimeInterval(fourtyMinutes)
+                    
+                    expect(firstDate.is30MinutesDifferent(from: secondDate)).to(beTrue())
+                }
+            }
+            
         }
     }
-
 }
